@@ -1,7 +1,8 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect ,get_object_or_404
 from django.views.generic import (
     ListView ,DetailView, CreateView, UpdateView ,DeleteView
 )
+from django.contrib.auth.models import User 
 from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
 from .models import *
 # Create your views here.
@@ -19,6 +20,23 @@ class PostListView(ListView):
     context_object_name ='posts' # context properties
     ordering =['-date_posted']   # arraned according date posted
 
+    #pagination
+    paginate_by =5
+
+   # fetching posts from a particular poster
+class UserPostListView(ListView):
+    model = Post # model name
+    template_name = 'user_posts.html'  # template name/path
+    context_object_name ='posts' # context properties
+    ordering =['-date_posted']   # arraned according date posted
+
+    #pagination
+    paginate_by =5
+
+    # getting queryset from the db
+    def get_queryset(self):
+        user = get_object_or_404(User ,username =self.kwargs.get('username')) # getting the username ,if not ,return 404
+        return Post.objects.filter(author = user).order_by('-date_posted')  # arraned according date posted
 
 class PostDetailView(DetailView):
     model = Post 
@@ -66,6 +84,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             if self.request.user == post.author: # author of the post
                 return True
             return False    
+
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

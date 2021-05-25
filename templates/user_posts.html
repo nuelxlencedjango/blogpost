@@ -1,8 +1,8 @@
 {% extends "base.html" %}
   {% block content %}
 
+  <h2 class="mb-3">Posts by {{ view.kwargs.username }} :({{ page_obj.paginator.count }})</h2>    <!--getting the username from the url-->   
   {% for post in posts %}
-       
 <article class="media content-section">
   <img class="rounded-circle article-img" src=" {{ post.author.profile.image.url}} " alt="">
     <div class="media-body">
