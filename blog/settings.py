@@ -35,7 +35,7 @@ SECRET_KEY = '@@i-o8lc6a6+cayz)ayjcjdig7e6wr!hk8(kn=wnsd+b7up@5v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nuelblog.herokuapp.com']
+ALLOWED_HOSTS = ['nuelblog.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -89,10 +89,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blog',
-        'USER' : 'postgres',
-        'PASSWORD' :'admin',
-        'HOST': 'localhost'
+        'NAME': 'd8q6k1rq90hr05',
+        'USER' : 'odwufwxljopiqp',
+        'PORT':5432,
+        'PASSWORD' :'77aec1fce6a3f3882dd13d86f187a7fd0bc8751d3843caf394b80dbb7ea1199b',
+        'HOST': 'ec2-52-73-184-24.compute-1.amazonaws.com'
     }
 }
 
